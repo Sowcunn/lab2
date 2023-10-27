@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<h1> Lab 1->6 tren Flask</h1>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	<div class="row">
+		<h2>Upload Image</h2>
+		<p>
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					<ul>
+					{% for message in messages %}
+						<li>
+							{{ message }}
+						</li>
+					{% endfor %}
+					</ul>
+				{% endif %}
+			{% endwith %}
+		</p>
+		{% if filename %}
+			<img src="{{ url_for('display_image', filename=filename) }}">
+    	{% endif %}
+
+		<form method="post" action="/" enctype="multipart/form-data">
+			<d1>
+				<p>
+					<input type="file" name="file" class="form-control" autocomplete="off" required />
+				</p>
+			</d1>
+			<p>
+				<input type="submit" value="Submit">
+			</p>
+
+		</form>
+		{% if filename %}
+		<form method="post" action="/work" enctype="multipart/form-data">
+			<p>
+				<input type="submit" name="submit_button" value="Inverse">
+				<input type="submit" name="submit_button" value="Gamma Correction">
+				<input type="submit" name="submit_button" value="Log Transformation">
+				<input type="submit" name="submit_button" value="Histogram equalization">
+				<input type="submit" name="submit_button" value="Contrast Stretching">
+				<input type="submit" name="submit_button" value="Fast Fourier Transformation">
+				<input type="submit" name="submit_button" value="Butterworth Lowpass Filter">
+				<input type="submit" name="submit_button" value="Butterworth highpass Filter">
+			</p>
+		</form>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}
